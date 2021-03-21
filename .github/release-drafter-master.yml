@@ -1,7 +1,7 @@
 # Config for https://github.com/toolmantim/release-drafter
 name-template: 'MyProjectMaster $NEXT_MINOR_VERSION'
-tag-template: '$NEXT_PATCH_VERSION'
-filter-by-commitish: true
+tag-template: '$NEXT_MINOR_VERSION'
+#filter-by-commitish: true
 commitish: master
 
 change-template: '- $TITLE [#$NUMBER] by [@$AUTHOR](https://github.com/$AUTHOR)'
