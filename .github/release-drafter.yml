@@ -1,0 +1,10 @@
+# Config for https://github.com/toolmantim/release-drafter
+name-template: 'MyProject $NEXT_MINOR_VERSION'
+tag-template: 'v$NEXT_MINOR_VERSION'
+filter-by-commitish: true
+
+change-template: '- $TITLE [#$NUMBER] by [@$AUTHOR](https://github.com/$AUTHOR)'
+template: |
+  ## Changes
+
+  $CHANGES
