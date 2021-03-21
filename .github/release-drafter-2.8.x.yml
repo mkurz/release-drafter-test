@@ -9,3 +9,5 @@ template: |
   ## Changes/master/28x_
 
   $CHANGES
+
+  previous: $PREVIOUS_TAG

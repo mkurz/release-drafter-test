@@ -9,3 +9,5 @@ template: |
   ## Changes/master/master
 
   $CHANGES
+
+  previous: $PREVIOUS_TAG
