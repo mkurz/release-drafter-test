@@ -6,6 +6,6 @@ commitish: master
 
 change-template: '- $TITLE [#$NUMBER] by [@$AUTHOR](https://github.com/$AUTHOR)'
 template: |
-  ## Changes
+  ## Changes/master/master
 
   $CHANGES
