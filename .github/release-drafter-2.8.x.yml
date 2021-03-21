@@ -6,6 +6,6 @@ commitish: 2.8.x
 
 change-template: '- $TITLE [#$NUMBER] by [@$AUTHOR](https://github.com/$AUTHOR)'
 template: |
-  ## Changes/master/28x
+  ## Changes/master/28x_
 
   $CHANGES
