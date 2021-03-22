@@ -1,5 +1,5 @@
 # Config for https://github.com/toolmantim/release-drafter
-name-template: 'MyProjectMaster $NEXT_MINOR_VERSION'
+name-template: 'Play $NEXT_MINOR_VERSION'
 tag-template: '$NEXT_MINOR_VERSION'
 filter-by-commitish: true
 commitish: master
