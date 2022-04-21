@@ -1,12 +1,12 @@
 name: Invalidate Cache
 
-on: workflow_dispatch
-
-inputs:
-  counter:
-    required: true
-  amount:
-    required: true
+on:
+  workflow_dispatch:
+    inputs:
+      counter:
+        required: true
+      amount:
+        required: true
 
 jobs:
   flush:
