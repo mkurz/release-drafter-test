@@ -17,6 +17,6 @@ jobs:
           path: /tmp/flush
           key: mykey # ${{ github.run_id }}-${{ github.run_attempt }}
       - run: |
-          for i in {1..${{ github.event.inputs.counter }}}; do head -c ${{ github.event.inputs.amount }} < /dev/zero >> /tmp/flush; done
+          for i in {1..${{ github.event.inputs.counter }}}; do head -c ${{ github.event.inputs.amount }} < /dev/urandom >> /tmp/flush; done
           ls -l /tmp/flush
           du /tmp/flush
