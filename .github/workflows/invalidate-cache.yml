@@ -1,0 +1,17 @@
+on: workflow_dispatch
+
+inputs:
+  counter:
+    required: true
+  amount:
+    required: true
+
+jobs:
+  flush:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/cache@v2
+        with:
+          path: /tmp/flush
+          key: ${{ github.run_id }}-${{ github.run_attempt }}
+      - run: for i in {1..${{ github.event.inputs.counter }}}; do head -c ${{ github.event.inputs.amount }} < /dev/zero >> /tmp/flush; done
