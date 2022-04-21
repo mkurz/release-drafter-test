@@ -8,6 +8,7 @@ inputs:
 
 jobs:
   flush:
+    name: Invalidate Cache
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/cache@v2
