@@ -1,22 +1,23 @@
-name: Invalidate Cache
+name: Trigger cache invalidation
 
 on:
   workflow_dispatch:
     inputs:
       counter:
-        required: true
+        required: false
+        default: 1
       amount:
         required: true
+        default: 10737170860
 
 jobs:
-  flush:
+  trigger-cache-invalidation:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/cache@v3
         with:
-          path: /tmp/flush
+          path: /tmp/big_file
           key: ${{ github.run_id }}-${{ github.run_attempt }}
       - run: |
-          for i in {1..${{ github.event.inputs.counter }}}; do head -c ${{ github.event.inputs.amount }} < /dev/urandom >> /tmp/flush; done
-          ls -l /tmp/flush
-          du /tmp/flush
+          for i in {1..${{ github.event.inputs.counter }}}; do head -c ${{ github.event.inputs.amount }} < /dev/urandom >> /tmp/big_file; done
+          ls -l /tmp/big_file
