@@ -16,5 +16,8 @@ jobs:
           ls -l /tmp/big_file
           echo "You can check the cache usage of this repo by running (stats refresh every 5 minutes):"
           echo "curl https://api.github.com/repos/${{ github.repository }}/actions/cache/usage"
-          echo "Now that the cache will be larger than the allowed maximum, older entries will be evicted by GitHub soon... Keep watching!"
+          echo "After the Post Run uploaded the huge file to the cache, it will be larger than the allowed maximum."
+          echo "Older entries will therefore be evicted by GitHub soon... Keep watching!"
+          echo "Documentation:"
           echo "https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy"
+          echo "https://docs.github.com/en/rest/actions/cache"
