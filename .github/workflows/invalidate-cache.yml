@@ -1,14 +1,10 @@
 name: Trigger cache invalidation
 
-on:
-  workflow_dispatch:
-    inputs:
-      bytes:
-        required: true
-        default: 10737170860
+on: workflow_dispatch
 
 jobs:
   trigger-cache-invalidation:
+    name: Cache large file
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/cache@v3
@@ -16,5 +12,9 @@ jobs:
           path: /tmp/big_file
           key: ${{ github.run_id }}-${{ github.run_attempt }}
       - run: |
-          head -c ${{ github.event.inputs.bytes }} < /dev/urandom >> /tmp/big_file
+          head -c 10737170860 < /dev/urandom >> /tmp/big_file
           ls -l /tmp/big_file
+          echo "You can check the cache usage of this repo by running (stats refresh every 5 minutes):"
+          echo "curl https://api.github.com/repos/${{ github.repository }}/actions/cache/usage"
+          echo "Now that the cache will be larger than the allowed maximum, older entries will be evicted by GitHub soon... Keep watching!"
+          echo "https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy"
