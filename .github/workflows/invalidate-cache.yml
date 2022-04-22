@@ -3,10 +3,7 @@ name: Trigger cache invalidation
 on:
   workflow_dispatch:
     inputs:
-      counter:
-        required: false
-        default: 1
-      amount:
+      bytes:
         required: true
         default: 10737170860
 
@@ -19,5 +16,5 @@ jobs:
           path: /tmp/big_file
           key: ${{ github.run_id }}-${{ github.run_attempt }}
       - run: |
-          for i in {1..${{ github.event.inputs.counter }}}; do head -c ${{ github.event.inputs.amount }} < /dev/urandom >> /tmp/big_file; done
+          head -c ${{ github.event.inputs.bytes }} < /dev/urandom >> /tmp/big_file
           ls -l /tmp/big_file
