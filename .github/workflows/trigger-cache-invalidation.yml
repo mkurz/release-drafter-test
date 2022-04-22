@@ -7,11 +7,13 @@ jobs:
     name: Cache large file
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/cache@v3
+      - name: Setup cache
+        uses: actions/cache@v3
         with:
           path: /tmp/big_file
           key: ${{ github.run_id }}-${{ github.run_attempt }}
-      - run: |
+      - name: Generate large file to cache
+        run: |
           head -c 10737170860 < /dev/urandom > /tmp/big_file
           ls -l /tmp/big_file
           echo "You can check the cache usage of this repo by running (stats refresh every 5 minutes):"
