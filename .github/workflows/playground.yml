@@ -15,7 +15,7 @@ concurrency:
 jobs:
   docs-tests:
     name: Just a test job
-    uses: mkurz/release-drafter-test/.github/workflows/sbt-matrix.yml@v1
+    uses: mkurz/release-drafter-test/.github/workflows/sbt-matrix.yml@master
     with:
       java: >-
         [ "11", "8" ]
