@@ -1,0 +1,25 @@
+name: Check
+
+on:
+  pull_request: # Check Pull Requests
+
+  push:
+    branches:
+      - master # Check master branch after merge
+
+concurrency:
+  # Only run once for latest commit per ref and cancel other (previous) runs.
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  docs-tests:
+    name: Just a test job
+    uses: playframework/.github/.github/workflows/sbt-matrix.yml@v1
+    with:
+      java: >-
+        [ "11", "8" ]
+      scala: >-
+        [ "2.12.15", "2.13.8" ]
+      cmd: |
+        echo $SCALA_VERSION
