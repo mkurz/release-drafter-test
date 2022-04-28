@@ -23,3 +23,4 @@ jobs:
         [ "2.12.15", "2.13.8" ]
       cmd: |
         echo $SCALA_VERSION
+        echo ${{ github.event_name != 'schedule' || github.run_id }}
