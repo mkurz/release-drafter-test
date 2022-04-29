@@ -17,9 +17,10 @@ jobs:
     name: Just a test job
     uses: mkurz/release-drafter-test/.github/workflows/sbt-matrix.yml@master
     with:
-      java: >-
+      env: SBT_VERSION=1.6.2
+      matrix.java: >-
         [ "11", "8" ]
-      scala: >-
+      matrix.scala: >-
         [ "2.12.15", "2.13.8" ]
       cmd: |
         echo $SCALA_VERSION
