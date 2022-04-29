@@ -1,4 +1,4 @@
-name: SBT command on matrix Java/Scala versions
+name: SBT command with matrix
 
 on:
   workflow_call:
@@ -54,7 +54,7 @@ jobs:
       - name: Install Adoptium Temurin OpenJDK
         uses: coursier/setup-action@v1.2.0-M3
         with:
-          jvm: adoptium:${{ matrix.java }}
+          jvm: adoptium:${{ fromJSON(format(format('{{{0}}}', toJSON(matrix)), '')).JAVA }}
 
       - name: Print helpful configs and files and show environment
         run: |
