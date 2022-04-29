@@ -75,6 +75,8 @@ jobs:
         run: |
           echo ${{ format('{{"{0}JAVA" : "{0}"}}', 'MATRIX_') }}
           echo ${{ join( fromJSON('[ ''one'', ''two'', ''three'' ]'), '' ) }}
+          echo ${{ fromJSON(format(format('{{{0}}}', toJSON(matrix)), 'MATRIX_')) }}
+
 #          echo ${{ format(toJSON(matrix), 'MATRIX_') }}
 #          echo ${{ join( [ 'one', 'two', 'three' ] ) }}
 #          echo ${{ fromJSON(format(join('[ ''{'' ', toJSON(matrix), ' ''}'' ]'), 'MATRIX_')) }}
