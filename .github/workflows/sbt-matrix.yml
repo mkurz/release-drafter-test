@@ -38,7 +38,7 @@ on:
 
 jobs:
   cmd:
-    name: toJSON(fromJSON(matrix)) #Scala ${{ matrix.scala }} & JDK ${{ matrix.java }}
+    name: ${{ toJSON(fromJSON(matrix)) }} #Scala ${{ matrix.scala }} & JDK ${{ matrix.java }}
     runs-on: ubuntu-20.04
     strategy:
       # WA: https://github.community/t/reusable-workflow-with-strategy-matrix/205676/6
