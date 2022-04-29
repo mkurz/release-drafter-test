@@ -73,8 +73,8 @@ jobs:
 
       - name: Run sbt command
         run: |
-          echo ${{ format('{{"{0}JAVA" : "{0}"}}', 'MATRIX_') }}
-          echo ${{ join( [ 'one', 'two', 'three' ] ) }}
+          echo ${{ format('{''{"{0}JAVA" : "{0}"}''}', 'MATRIX_') }}
+#          echo ${{ join( [ 'one', 'two', 'three' ] ) }}
 #          echo ${{ fromJSON(format(join('[ ''{'' ', toJSON(matrix), ' ''}'' ]'), 'MATRIX_')) }}
 #       "{0}JAVA": "11"
 #        env: ${{ fromJSON(format('{0} {1}', 'Mona', 'the')) }}
