@@ -73,7 +73,9 @@ jobs:
 
       - name: Run sbt command
         run: ${{ inputs.cmd }}
-        env: ${{ fromJSON(format(format('{{{0}}}', toJSON(matrix)), 'MATRIX_')) }}
+        env:
+         ${{ fromJSON(format(format('{{{0}}}', toJSON(matrix)), 'MATRIX_')) }}
+         CACHE_HIT_COURSIER: ${{ steps.coursier-cache.outputs.cache-hit-coursier }}
 
       - name: Cleanup before cache
         shell: bash

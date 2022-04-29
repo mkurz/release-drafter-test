@@ -25,4 +25,5 @@ jobs:
         }
       cmd: |
         echo $MATRIX_SCALA
+        echo $CACHE_HIT_COURSIER
         echo ${{ github.event_name == 'schedule' || github.run_id }}
