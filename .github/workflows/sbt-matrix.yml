@@ -75,8 +75,7 @@ jobs:
         run: |
           echo ${{ format('{{"{0}JAVA" : "{0}"}}', 'MATRIX_') }}
           echo ${{ join( fromJSON('[ ''one'', ''two'', ''three'' ]'), '' ) }}
-          echo ${{ toJSON(fromJSON(format(format('{{{0}}}', toJSON(matrix)), 'MATRIX_'))) }}
-
+          echo ${{ fromJSON(format(format('{{{0}}}', toJSON(matrix)), 'MATRIX_')) }}
 #          echo ${{ format(toJSON(matrix), 'MATRIX_') }}
 #          echo ${{ join( [ 'one', 'two', 'three' ] ) }}
 #          echo ${{ fromJSON(format(join('[ ''{'' ', toJSON(matrix), ' ''}'' ]'), 'MATRIX_')) }}
@@ -84,6 +83,8 @@ jobs:
 #        env: ${{ fromJSON(format('{0} {1}', 'Mona', 'the')) }}
 #        env: ${{ fromJSON(format('${0}: 11', 'MATRIX_')) }}
 #        env: ${{ fromJSON(format(toJSON(matrix), 'MATRIX_')) }}
+        env: ${{ fromJSON(format(format('{{{0}}}', toJSON(matrix)), 'MATRIX_')) }}
+
 
       - name: Cleanup before cache
         shell: bash
