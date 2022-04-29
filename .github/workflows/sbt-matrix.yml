@@ -74,7 +74,7 @@ jobs:
       - name: Run sbt command
         run: ${{ inputs.cmd }}
 #       "{0}JAVA": "11"
-        env: ${{ fromJSON(format('Hello "{{0}}" {1} {2}', 'Mona', 'the', 'Octocat')) }}
+        env: ${{ fromJSON(format('Hello {0} {1} {2}', 'Mona', 'the', 'Octocat')) }}
 #        env: ${{ fromJSON(format('${0}: 11', 'MATRIX_')) }}
 #        env: ${{ fromJSON(format(toJSON(matrix), 'MATRIX_')) }}
 
