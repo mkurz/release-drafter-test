@@ -42,11 +42,11 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       # WA: https://github.community/t/reusable-workflow-with-strategy-matrix/205676/6
-      matrix:
-        java: ${{ fromJson(inputs['matrix.java']) }}
-        scala: ${{ fromJson(inputs['matrix.scala']) }}
-        include: ${{ fromJson(inputs.include) }}
-        exclude: ${{ fromJson(inputs.exclude) }}
+      matrix: ${{ fromJson(inputs.matrix) }}
+#        java: ${{ fromJson(inputs['matrix.java']) }}
+#        scala: ${{ fromJson(inputs['matrix.scala']) }}
+#        include: ${{ fromJson(inputs.include) }}
+#        exclude: ${{ fromJson(inputs.exclude) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
