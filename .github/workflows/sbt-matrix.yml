@@ -73,8 +73,7 @@ jobs:
 
       - name: Run sbt command
         run: ${{ inputs.cmd }}
-        env: ${{ matrix }}
-#          SCALA_VERSION: ${{ matrix.scala }}
+        env: ${{ fromJSON(toJSON(matrix)) }}
 
       - name: Cleanup before cache
         shell: bash
