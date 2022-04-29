@@ -42,7 +42,7 @@ jobs:
 
       - name: Coursier Cache
         id: coursier-cache
-        uses: coursier/cache-action@v6.3
+        uses: coursier/cache-action@v6.3.1
 
       - name: Custom Cache
         uses: actions/cache@v2
@@ -72,19 +72,8 @@ jobs:
           ls -alFhR ~/.cache/coursier | grep play | grep jar || true
 
       - name: Run sbt command
-        run: |
-          echo ${{ format('{{"{0}JAVA" : "{0}"}}', 'MATRIX_') }}
-          echo ${{ join( fromJSON('[ ''one'', ''two'', ''three'' ]'), '' ) }}
-          echo ${{ fromJSON(format(format('{{{0}}}', toJSON(matrix)), 'MATRIX_')) }}
-#          echo ${{ format(toJSON(matrix), 'MATRIX_') }}
-#          echo ${{ join( [ 'one', 'two', 'three' ] ) }}
-#          echo ${{ fromJSON(format(join('[ ''{'' ', toJSON(matrix), ' ''}'' ]'), 'MATRIX_')) }}
-#       "{0}JAVA": "11"
-#        env: ${{ fromJSON(format('{0} {1}', 'Mona', 'the')) }}
-#        env: ${{ fromJSON(format('${0}: 11', 'MATRIX_')) }}
-#        env: ${{ fromJSON(format(toJSON(matrix), 'MATRIX_')) }}
+        run: ${{ inputs.cmd }}
         env: ${{ fromJSON(format(format('{{{0}}}', toJSON(matrix)), 'MATRIX_')) }}
-
 
       - name: Cleanup before cache
         shell: bash
