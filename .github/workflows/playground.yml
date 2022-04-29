@@ -19,7 +19,7 @@ jobs:
     with:
       matrix: >-
         {
-          '{0}JAVA': [ "11" ],
+          '{0}JAVA': [ "8" ],
         }
       cmd: |
         echo $MATRIX_SCALA
