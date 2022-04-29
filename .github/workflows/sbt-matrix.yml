@@ -73,7 +73,7 @@ jobs:
 
       - name: Run sbt command
         run: ${{ inputs.cmd }}
-        env: ${{ fromJSON(format(toJSON(matrix), 'MATRIX_')) }}
+        env: ${{ format(toJSON(matrix), 'MATRIX_') }}
 
       - name: Cleanup before cache
         shell: bash
