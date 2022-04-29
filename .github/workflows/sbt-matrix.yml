@@ -72,7 +72,7 @@ jobs:
           ls -alFhR ~/.cache/coursier | grep play | grep jar || true
 
       - name: Run sbt command
-        run: echo ${{ format('{0}\: {1}', 'Mona', 'the') }}
+        run: echo ${{ format('{0}:: {1}', 'Mona', 'the') }}
 #       "{0}JAVA": "11"
 #        env: ${{ fromJSON(format('{0} {1}', 'Mona', 'the')) }}
 #        env: ${{ fromJSON(format('${0}: 11', 'MATRIX_')) }}
