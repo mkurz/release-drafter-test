@@ -43,6 +43,7 @@ jobs:
       - name: Coursier Cache
         id: coursier-cache
         uses: coursier/cache-action@v6.3.1
+        run: echo 'CACHE_HIT_COURSIER=${{ steps.coursier-cache.outputs.cache-hit-coursier }}' >> $GITHUB_ENV
 
       - name: Custom Cache
         uses: actions/cache@v2
@@ -73,9 +74,7 @@ jobs:
 
       - name: Run sbt command
         run: ${{ inputs.cmd }}
-        env:
-         ${{ fromJSON(format(format('{{{0}}}', toJSON(matrix)), 'MATRIX_')) }}
-         CACHE_HIT_COURSIER: ${{ steps.coursier-cache.outputs.cache-hit-coursier }}
+        env: ${{ fromJSON(format(format('{{{0}}}', toJSON(matrix)), 'MATRIX_')) }}
 
       - name: Cleanup before cache
         shell: bash
