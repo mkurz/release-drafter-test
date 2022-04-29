@@ -3,12 +3,15 @@ name: SBT command on matrix Java/Scala versions
 on:
   workflow_call:
     inputs:
-      matrix.java:
+      matrix:
         type: string
         required: true
-      matrix.scala:
-        type: string
-        required: true
+#      matrix.java:
+#        type: string
+#        required: true
+#      matrix.scala:
+#        type: string
+#        required: true
       include:
         type: string
         required: false
