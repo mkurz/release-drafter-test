@@ -18,10 +18,15 @@ jobs:
     uses: mkurz/release-drafter-test/.github/workflows/sbt-matrix.yml@master
     with:
       env: SBT_VERSION=1.6.2
-      matrix.java: >-
-        [ "11", "8" ]
-      matrix.scala: >-
-        [ "2.12.15", "2.13.8" ]
+      matrix: >-
+        {
+          java: [ "11", "8" ],
+          scala: [ "2.12.15", "2.13.8" ],
+        }
+#      matrix.java: >-
+#        [ "11", "8" ]
+#      matrix.scala: >-
+#        [ "2.12.15", "2.13.8" ]
       cmd: |
         echo $SCALA_VERSION
         echo ${{ github.event_name == 'schedule' || github.run_id }}
