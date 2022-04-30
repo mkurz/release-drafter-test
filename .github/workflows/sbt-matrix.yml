@@ -9,6 +9,10 @@ on:
       scala:
         type: string
         required: true
+      add_dimensions:
+        type: string
+        required: false
+        default: "{}"
       include:
         type: string
         required: false
@@ -43,10 +47,10 @@ jobs:
       run: |
         inputs_java=$(echo -n '${{ inputs.java }}')
         inputs_scala=$(echo -n '${{ inputs.scala }}')
-        inputs_includes=$(echo -n '${{ inputs.includes }}')
-        inputs_excludes=$(echo -n '${{ inputs.excludes }}')
+        inputs_include=$(echo -n '${{ inputs.include }}')
+        inputs_exclude=$(echo -n '${{ inputs.exclude }}')
         add_dimensions=$(echo -n '${{ inputs.add_dimensions }}' | sed 's/^.*{//;s/}.*$//')
-        echo ::set-output name=matrix::{\"java\":$(echo $inputs_java), \"scala\":$(echo $inputs_scala),$(echo $add_dimensions)\"includes\":$(echo $inputs_includes), \"includes\":$(echo $inputs_excludes)}\"
+        echo ::set-output name=matrix::{\"java\":$(echo $inputs_java), \"scala\":$(echo $inputs_scala),$(echo $add_dimensions),\"include\":$(echo $inputs_include), \"exclude\":$(echo $inputs_exclude)}\"
 #        branchName=$(echo '${{ github.ref }}' | sed 's,refs/heads/,,g')
 #        matrix=$(jq --arg branchName "$branchName" 'map(. | select((.runOn==$branchName) or (.runOn=="always")) )' matrix_includes.json)
 #        echo ::set-output name=matrix::{\"include\":$(echo $matrix)}\"
