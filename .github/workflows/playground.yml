@@ -18,6 +18,8 @@ jobs:
     steps:
       - run: |
           jq -n -r '$in | to_entries|map("MATRIX_\(.key|ascii_upcase)=\"\(.value|tostring)\"")|.[]' --argjson in '{ "java": "11", "scala": "2.13.8", "sbt_test_task": "test", "folder": "." }' >> $GITHUB_ENV
+      - run: |
+          echo "Hello world!"
 #  docs-tests:
 #    name: Just a test job
 #    uses: mkurz/release-drafter-test/.github/workflows/sbt-matrix.yml@master
