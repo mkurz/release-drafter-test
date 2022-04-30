@@ -66,7 +66,7 @@ jobs:
         uses: actions/cache@v2
         if: ${{ inputs.cache-key != '' && inputs.cache-path != '' }}
         with:
-          key: ${{ format(inputs.cache-key, matrix.java }}
+          key: ${{ format(inputs.cache-key, matrix.java) }}
           path: ${{ inputs.cache-path }}
 
       - name: Install Adoptium Temurin OpenJDK
@@ -89,9 +89,13 @@ jobs:
           echo "ls -alFhR ~/.cache/coursier | grep play | grep jar"
           ls -alFhR ~/.cache/coursier | grep play | grep jar || true
 
+      - name: Convert matrix elements to environment variables
+        run: |
+          jq -n -r '$in | to_entries|map("MATRIX_\(.key|ascii_upcase)=\(.value|tostring)")|.[]' --argjson in '{ "java": "11", "scala": "2.13.8", "sbt_test_task": "test", "folder": "." }' >> $GITHUB_ENV
+
       - name: Run sbt command
         run: ${{ inputs.cmd }}
-        env: ${{ fromJSON(format(format('{{{0}}}', toJSON(matrix)), 'MATRIX_')) }}
+#        env: ${{ fromJSON(format(format('{{{0}}}', toJSON(matrix)), 'MATRIX_')) }}
 
       - name: Cleanup before cache
         shell: bash
