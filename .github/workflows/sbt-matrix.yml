@@ -34,6 +34,24 @@ on:
         default: ""
 
 jobs:
+  prepare-matrix:
+    runs-on: ubuntu-20.04
+    outputs:
+      matrix: ${{ steps.prepare-matrix.outputs.matrix }}
+    steps:
+    - id: prepare-matrix
+      run: |
+#        branchName=$(echo '${{ github.ref }}' | sed 's,refs/heads/,,g')
+#        matrix=$(jq --arg branchName "$branchName" 'map(. | select((.runOn==$branchName) or (.runOn=="always")) )' matrix_includes.json)
+        add_dimensions=$(echo -n '${{ inputs.add_dimensions }}' | sed 's/^.*{//;s/}.*$//')
+        echo ::set-output name=matrix::{\"java\":${{ inputs.java }}, \"scala\":${{ inputs.scala }}},$(echo $add_dimensions)\"includes\":${{ inputs.includes }}, \"includes\":${{ inputs.excludes }}}\"
+#        echo ::set-output name=matrix::{\"include\":$(echo $matrix)}\"
+  testing_matrix:
+    needs: prepare-matrix
+    runs-on: ubuntu-20.04
+    steps:
+    - run: |
+        echo ${{toJSON(fromJson(needs.prepare-matrix.outputs.matrix))}}
   cmd:
     name: ${{ toJSON(matrix) }}
     runs-on: ubuntu-20.04
