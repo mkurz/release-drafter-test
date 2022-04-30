@@ -41,8 +41,12 @@ jobs:
     steps:
     - id: prepare-matrix
       run: |
+        inputs_java=$(echo -n '${{ inputs.java }}')
+        inputs_scala=$(echo -n '${{ inputs.scala }}')
+        inputs_includes=$(echo -n '${{ inputs.includes }}')
+        inputs_excludes=$(echo -n '${{ inputs.excludes }}')
         add_dimensions=$(echo -n '${{ inputs.add_dimensions }}' | sed 's/^.*{//;s/}.*$//')
-        echo ::set-output name=matrix::{\"java\":${{ inputs.java }}, \"scala\":${{ inputs.scala }},$(echo $add_dimensions)\"includes\":${{ inputs.includes }}, \"includes\":${{ inputs.excludes }}}\"
+        echo ::set-output name=matrix::{\"java\":$(echo $inputs_java), \"scala\":$(echo $inputs_scala),$(echo $add_dimensions)\"includes\":$(echo $inputs_includes), \"includes\":$(echo $inputs_excludes)}\"
 #        branchName=$(echo '${{ github.ref }}' | sed 's,refs/heads/,,g')
 #        matrix=$(jq --arg branchName "$branchName" 'map(. | select((.runOn==$branchName) or (.runOn=="always")) )' matrix_includes.json)
 #        echo ::set-output name=matrix::{\"include\":$(echo $matrix)}\"
