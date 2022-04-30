@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - run: |
-          jq -n -r '$in | to_entries|map("MATRIX_\(.key|ascii_upcase)=\"\(.value|tostring)\"")|.[]' --argjson in '{ "java": "11", "scala": "2.13.8", "sbt_test_task": "test", "folder": "." }' >> $GITHUB_ENV
+          jq -n -r '$in | to_entries|map("MATRIX_\(.key|ascii_upcase)=\(.value|tostring)")|.[]' --argjson in '{ "java": "11", "scala": "2.13.8", "sbt_test_task": "test", "folder": "." }' >> $GITHUB_ENV
       - run: |
           echo "Hello world!"
 #  docs-tests:
