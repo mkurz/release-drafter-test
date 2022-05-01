@@ -50,7 +50,7 @@ jobs:
         inputs_include=$(echo -n '${{ inputs.include }}')
         inputs_exclude=$(echo -n '${{ inputs.exclude }}')
         add_dimensions=$(echo -n '${{ inputs.add_dimensions }}' | sed 's/^.*{//;s/}.*$//') # Remove leading { and trailing }
-        echo ::set-output name=matrix::{\"java\":$(echo $inputs_java), \"scala\":$(echo $inputs_scala),$(echo ${add_dimensions:+$add_dimensions,})\"include\":$(echo $inputs_include), \"exclude\":$(echo $inputs_exclude)}\"
+        echo ::set-output name=matrix::{\"java\":$(echo $inputs_java), \"scala\":$(echo $inputs_scala),$(echo ${add_dimensions:+$add_dimensions,})\"include\":$(echo $inputs_include), \"exclude\":$(echo $inputs_exclude)}
   testing_matrix:
     needs: prepare-matrix
     runs-on: ubuntu-20.04
