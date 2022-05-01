@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - run: |
-        echo "${{toJSON(fromJson(needs.prepare-matrix.outputs.matrix))}}"
+        echo "${{needs.prepare-matrix.outputs.matrix}}"
   cmd:
     name: ${{ toJSON(matrix) }}
     needs: prepare-matrix
