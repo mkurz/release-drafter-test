@@ -32,7 +32,7 @@ jobs:
         { "steps": [ "*1of3", "*2of3", "*3of3" ], "sbt_version": [ "1.3.13", "1.6.2" ] }
       exclude: >-
         [ { "sbt_version": "1.3.13", "java": "11" } ]
-      cache-key: "test-no-substition"
+      cache-key: "test-{0}-substition"
       cache-path: "$HOME/.ivy/local/"
 #      env: SBT_VERSION=1.6.2
 #      matrix: >-
