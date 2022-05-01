@@ -1,14 +1,12 @@
-name: SBT command with matrix
+name: Command with a default JVM, coursier caching and an optional matrix
 
 on:
   workflow_call:
     inputs:
       java:
         type: string
-        required: true
-      scala:
-        type: string
-        required: true
+        required: false
+        default: "[ 8 ]"
       add-dimensions:
         type: string
         required: false
@@ -47,7 +45,7 @@ jobs:
     - id: prepare-matrix
       run: |
         add_dimensions=$(echo -n '${{ inputs.add-dimensions }}' | sed 's/^.*{//;s/}.*$//') # Remove leading { and trailing }
-        echo ::set-output name=matrix::{\"java\":$(echo '${{ inputs.java }}'), \"scala\":$(echo '${{ inputs.scala }}'),$(echo ${add_dimensions:+$add_dimensions,})\"include\":$(echo '${{ inputs.include }}'), \"exclude\":$(echo '${{ inputs.exclude }}')}
+        echo ::set-output name=matrix::{\"java\":$(echo '${{ inputs.java }}'), $(echo ${add_dimensions:+$add_dimensions,})\"include\":$(echo '${{ inputs.include }}'), \"exclude\":$(echo '${{ inputs.exclude }}')}
   cmd:
     name: ${{ toJSON(matrix) }}
     needs: prepare-matrix
@@ -101,7 +99,7 @@ jobs:
         run: |
           jq -n -r '$in | to_entries|map("MATRIX_\(.key|ascii_upcase)=\(.value|tostring)")|.[]' --argjson in '${{ toJSON(matrix) }}' >> $GITHUB_ENV
 
-      - name: Run sbt command
+      - name: Run command
         run: ${{ inputs.cmd }}
         env:
           CACHE_HIT_COURSIER: ${{ steps.coursier-cache.outputs.cache-hit-coursier }}
