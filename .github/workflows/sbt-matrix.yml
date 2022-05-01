@@ -39,6 +39,7 @@ on:
 
 jobs:
   prepare-matrix:
+    name: Prepare Matrix
     runs-on: ubuntu-20.04
     outputs:
       matrix: ${{ steps.prepare-matrix.outputs.matrix }}
