@@ -9,7 +9,7 @@ on:
       scala:
         type: string
         required: true
-      add_dimensions:
+      add-dimensions:
         type: string
         required: false
         default: "{}"
@@ -49,19 +49,14 @@ jobs:
         inputs_scala=$(echo -n '${{ inputs.scala }}')
         inputs_include=$(echo -n '${{ inputs.include }}')
         inputs_exclude=$(echo -n '${{ inputs.exclude }}')
-        add_dimensions=$(echo -n '${{ inputs.add_dimensions }}' | sed 's/^.*{//;s/}.*$//') # Remove leading { and trailing }
-        echo ::set-output name=matrix::{\"java\":$(echo $inputs_java), \"scala\":$(echo $inputs_scala),$(echo ${add_dimensions:+$add_dimensions,})\"include\":$(echo $inputs_include), \"exclude\":$(echo $inputs_exclude)}
-#  testing_matrix:
-#    needs: prepare-matrix
-#    runs-on: ubuntu-20.04
-#    steps:
-#    - run: |
-#        echo ${{toJSON(fromJson(needs.prepare-matrix.outputs.matrix))}}
+        add-dimensions=$(echo -n '${{ inputs.add-dimensions }}' | sed 's/^.*{//;s/}.*$//') # Remove leading { and trailing }
+        echo ::set-output name=matrix::{\"java\":$(echo $inputs_java), \"scala\":$(echo $inputs_scala),$(echo ${add-dimensions:+$add-dimensions,})\"include\":$(echo $inputs_include), \"exclude\":$(echo $inputs_exclude)}
   cmd:
     name: ${{ toJSON(matrix) }}
     needs: prepare-matrix
     runs-on: ubuntu-20.04
     strategy:
+      # WA: https://github.community/t/reusable-workflow-with-strategy-matrix/205676/6
       matrix: ${{fromJson(needs.prepare-matrix.outputs.matrix)}}
     steps:
       - name: Checkout
