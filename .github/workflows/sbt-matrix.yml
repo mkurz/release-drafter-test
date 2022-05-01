@@ -51,18 +51,18 @@ jobs:
         inputs_exclude=$(echo -n '${{ inputs.exclude }}')
         add_dimensions=$(echo -n '${{ inputs.add_dimensions }}' | sed 's/^.*{//;s/}.*$//') # Remove leading { and trailing }
         echo ::set-output name=matrix::{\"java\":$(echo $inputs_java), \"scala\":$(echo $inputs_scala),$(echo ${add_dimensions:+$add_dimensions,})\"include\":$(echo $inputs_include), \"exclude\":$(echo $inputs_exclude)}
-  testing_matrix:
-    needs: prepare-matrix
-    runs-on: ubuntu-20.04
-    steps:
-    - run: |
-        echo "${{needs.prepare-matrix.outputs.matrix}}"
+#  testing_matrix:
+#    needs: prepare-matrix
+#    runs-on: ubuntu-20.04
+#    steps:
+#    - run: |
+#        echo ${{toJSON(fromJson(needs.prepare-matrix.outputs.matrix))}}
   cmd:
     name: ${{ toJSON(matrix) }}
     needs: prepare-matrix
     runs-on: ubuntu-20.04
-    strategy: >-
-      ${{fromJson(needs.prepare-matrix.outputs.matrix)}}
+    strategy:
+      matrix: ${{fromJson(needs.prepare-matrix.outputs.matrix)}}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
