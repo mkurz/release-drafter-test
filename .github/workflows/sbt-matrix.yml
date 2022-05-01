@@ -45,12 +45,9 @@ jobs:
     steps:
     - id: prepare-matrix
       run: |
-        inputs_java=$(echo -n '${{ inputs.java }}')
-        inputs_scala=$(echo -n '${{ inputs.scala }}')
         inputs_include=$(echo -n '${{ inputs.include }}')
-        inputs_exclude=$(echo -n '${{ inputs.exclude }}')
         add_dimensions=$(echo -n '${{ inputs.add-dimensions }}' | sed 's/^.*{//;s/}.*$//') # Remove leading { and trailing }
-        echo ::set-output name=matrix::{\"java\":$(echo $inputs_java), \"scala\":$(echo $inputs_scala),$(echo ${add_dimensions:+$add_dimensions,})\"include\":$(echo $inputs_include), \"exclude\":$(echo $inputs_exclude)}
+        echo ::set-output name=matrix::{\"java\":$(echo ${{ inputs.java }}), \"scala\":$(echo ${{ inputs.scala }}),$(echo ${add_dimensions:+$add_dimensions,})\"include\":$(echo $inputs_include), \"exclude\":$(echo ${{ inputs.exclude }})}
   cmd:
     name: ${{ toJSON(matrix) }}
     needs: prepare-matrix
