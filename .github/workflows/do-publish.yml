@@ -10,16 +10,5 @@ on:
 jobs:
   publish-artifacts:
     name: Publish / Artifacts
-    runs-on: ubuntu-latest
-    steps:
-      - name: releasing
-        run: |
-          echo ${{ github.event_name }}
-          echo ${{ github.event.ref_type }}
-          echo ${{ github.ref }}
-        env:
-          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-          PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
-          PGP_SECRET: ${{ secrets.PGP_SECRET }}
-
+    uses: playframework/.github/.github/workflows/publish.yml@370f1e3e00a73fe772136234af01e6e464ebe692
+    secrets: inherit
