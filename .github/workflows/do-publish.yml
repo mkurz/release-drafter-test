@@ -12,7 +12,8 @@ on:
 jobs:
   publish-artifacts:
     name: Publish / Artifacts
-    run: |
-      echo ${{ github.event_name }}
-      echo ${{ github.event.ref_type }}
-      echo ${{ github.ref }}
+    steps:
+      run: |
+        echo ${{ github.event_name }}
+        echo ${{ github.event.ref_type }}
+        echo ${{ github.ref }}
