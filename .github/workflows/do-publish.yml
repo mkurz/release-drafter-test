@@ -12,8 +12,10 @@ on:
 jobs:
   publish-artifacts:
     name: Publish / Artifacts
+    runs-on: ubuntu-latest
     steps:
-      run: |
-        echo ${{ github.event_name }}
-        echo ${{ github.event.ref_type }}
-        echo ${{ github.ref }}
+      - name: releasing
+        run: |
+          echo ${{ github.event_name }}
+          echo ${{ github.event.ref_type }}
+          echo ${{ github.ref }}
