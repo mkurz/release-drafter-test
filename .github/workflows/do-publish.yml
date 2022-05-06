@@ -5,13 +5,14 @@ on:
     branches: # Snapshots
       - main
     tags: ["*"] # Releases
+  create:
+    tags:
+      - "**"
 
 jobs:
   publish-artifacts:
     name: Publish / Artifacts
-    uses: mkurz/release-drafter-test/.github/workflows/publish.yml@master
-    secrets:
-      username: ${{ secrets.SONATYPE_USERNAME }}
-      password: ${{ secrets.SONATYPE_PASSWORD }}
-      pgp_passphrase: ${{ secrets.PGP_PASSPHRASE }}
-      pgp_secret: ${{ secrets.PGP_SECRET }}
+    run: |
+      echo ${{ github.event_name }}
+      echo ${{ github.event.ref_type }}
+      echo ${{ github.ref }}
