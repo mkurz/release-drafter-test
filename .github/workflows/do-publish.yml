@@ -6,8 +6,6 @@ on:
       - master
     tags: # Releases
       - '**'
-#  release:
-#    types: [published]
 
 jobs:
   publish-artifacts:
